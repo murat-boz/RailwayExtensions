@@ -7,7 +7,7 @@
         {
             if (maybe.HasNoValue)
             {
-                return Result.Fail<T>(errorMessage);
+                return Result.Failure<T>(errorMessage);
             }
 
             return Result.Ok(maybe.Value);

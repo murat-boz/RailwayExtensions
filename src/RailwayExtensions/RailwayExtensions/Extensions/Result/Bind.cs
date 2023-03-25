@@ -10,7 +10,7 @@ namespace RailwayExtensions.Extensions
         {
             if (result.IsFailure)
             {
-                return Result.Fail(result.Error);
+                return Result.Failure(result.Error);
             }
 
             return func(result.Value);
@@ -22,7 +22,7 @@ namespace RailwayExtensions.Extensions
         {
             if (result.IsFailure)
             {
-                return Result.Fail<TOut>(result.Error);
+                return Result.Failure<TOut>(result.Error);
             }
 
             return func(result.Value);

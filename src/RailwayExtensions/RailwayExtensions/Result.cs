@@ -12,7 +12,7 @@
             this.Error     = error;
         }
 
-        public static Result Fail(string errorMessage)
+        public static Result Failure(string errorMessage)
         {
             return new Result(false, errorMessage);
         }
@@ -22,7 +22,7 @@
             return new Result(true, string.Empty);
         }
 
-        public static Result<T> Fail<T>(string errorMessage)
+        public static Result<T> Failure<T>(string errorMessage)
         {
             return new Result<T>(default(T), false, errorMessage);
         }

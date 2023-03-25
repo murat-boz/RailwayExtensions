@@ -16,7 +16,22 @@ namespace RailwayExtensions.Extensions
 
             return predicate(result.Value) 
                 ? result 
-                : Result.Fail<T>(errorMessage);
+                : Result.Failure<T>(errorMessage);
+        }
+
+        public static Result Ensure(
+            this Result result,
+            Func<bool> predicate,
+            string errorMessage)
+        {
+            if (result.IsFailure)
+            {
+                return result;
+            }
+
+            return predicate()
+                ? result
+                : Result.Failure(errorMessage);
         }
     }
 }

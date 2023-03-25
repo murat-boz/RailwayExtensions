@@ -23,7 +23,8 @@ namespace RailwayExtensions
         /// </summary>
         /// <param name="hashCode">The hash code.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator int(HashCode hashCode) => hashCode.value;
+        public static implicit operator int(HashCode hashCode) => 
+            hashCode.value;
 
         /// <summary>
         /// Implements the operator ==.
@@ -31,7 +32,8 @@ namespace RailwayExtensions
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator ==(HashCode left, HashCode right) => left.Equals(right);
+        public static bool operator ==(HashCode left, HashCode right) => 
+            left.Equals(right);
 
         /// <summary>
         /// Implements the operator !=.
@@ -39,7 +41,8 @@ namespace RailwayExtensions
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator !=(HashCode left, HashCode right) => !(left == right);
+        public static bool operator !=(HashCode left, HashCode right) => 
+            !(left == right);
 
         /// <summary>
         /// Takes the hash code of the specified item.
@@ -47,7 +50,8 @@ namespace RailwayExtensions
         /// <typeparam name="T">The type of the item.</typeparam>
         /// <param name="item">The item.</param>
         /// <returns>The new hash code.</returns>
-        public static HashCode Of<T>(T item) => new HashCode(GetHashCode(item));
+        public static HashCode Of<T>(T item) => 
+            new HashCode(GetHashCode(item));
 
         /// <summary>
         /// Takes the hash code of the specified items.
@@ -56,7 +60,9 @@ namespace RailwayExtensions
         /// <param name="items">The collection.</param>
         /// <returns>The new hash code.</returns>
         public static HashCode OfEach<T>(IEnumerable<T> items) =>
-            items == null ? new HashCode(0) : new HashCode(GetHashCode(items, 0));
+            items == null 
+                ? new HashCode(0) 
+                : new HashCode(GetHashCode(items, 0));
 
         /// <summary>
         /// Adds the hash code of the specified item.
