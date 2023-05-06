@@ -4,7 +4,7 @@ namespace RailwayExtensions.Extensions
 {
     public static partial class ResultExtensions
     {
-        public static Result BindAsync<TIn>(
+        public static Result Bind<TIn>(
             this Result<TIn> result,
             Func<TIn, Result> func)
         {
@@ -16,7 +16,7 @@ namespace RailwayExtensions.Extensions
             return func(result.Value);
         }
 
-        public static Result<TOut> BindAsync<TIn, TOut>(
+        public static Result<TOut> Bind<TIn, TOut>(
             this Result<TIn> result,
             Func<TIn, Result<TOut>> func)
         {

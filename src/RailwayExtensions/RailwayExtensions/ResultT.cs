@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace RailwayExtensions
 {
-    public class Result<T> : Result
+    public sealed class Result<T> : Result
     {
         private readonly T value;
 
