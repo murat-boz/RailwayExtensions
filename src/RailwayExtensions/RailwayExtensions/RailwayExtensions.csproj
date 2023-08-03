@@ -3,9 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <GeneratedAssemblyInfoFile>AssemblyInfo.cs</GeneratedAssemblyInfoFile>
-    <Version>1.0.1.0</Version>
+    <Version>1.0.2.0</Version>
     <Authors>Murat BOZ</Authors>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -15,6 +13,8 @@
     <Description>This package is built for implementing Railway Oriented Programming.</Description>
     <PackageProjectUrl>https://github.com/murat-boz</PackageProjectUrl>
     <PackageTags>Railway;ROP</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title></Title>
   </PropertyGroup>
 
   <ItemGroup>
