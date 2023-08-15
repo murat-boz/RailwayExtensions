@@ -10,10 +10,6 @@ namespace RailwayExtensions.Extensions
             Action<T> action)
         {
             return result.OnSuccess(action);
-
-            //return 
-            //    await Result.CreateAsync(result.Value)
-            //                .OnSuccessAsync(x => action(x));
         }
 
         /// <summary>
@@ -42,9 +38,6 @@ namespace RailwayExtensions.Extensions
             Action action)
         {
             return result.OnSuccess(action);
-            //return
-            //    await Result.CreateAsync(result)
-            //                .OnSuccessAsync(() => action?.Invoke());
         }
 
         /// <summary>
@@ -72,9 +65,6 @@ namespace RailwayExtensions.Extensions
             Func<TIn, TOut> func)
         {
             return result.OnSuccess(func);
-            //return
-            //    await Result.CreateAsync(result.Value)
-            //                .OnSuccessAsync(x => func(x));
         }
 
         public async static Task<Result<TOut>> OnSuccessAsync<TIn, TOut>(
@@ -83,12 +73,9 @@ namespace RailwayExtensions.Extensions
         {
             Result<TIn> result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return Result.Failure<TOut>(result.Error);
-            }
-
-            return Result.Ok(func(result.Value));
+            return result.IsSuccess 
+                ? Result.Ok(func(result.Value))
+                : Result.Failure<TOut>(result.Error);
         }
 
         public async static Task<Result<TOut>> OnSuccessAsync<TIn, TOut>(
@@ -114,12 +101,9 @@ namespace RailwayExtensions.Extensions
         {
             Result<TIn> result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return Result.Failure<TOut>(result.Error);
-            }
-
-            return Result.Ok(await func(result.Value));
+            return result.IsSuccess 
+                ? Result.Ok(await func(result.Value))
+                : Result.Failure<TOut>(result.Error);
         }
 
         public async static Task<Result> OnSuccessAsync(
@@ -127,9 +111,6 @@ namespace RailwayExtensions.Extensions
             Func<Result> func)
         {
             return result.OnSuccess(func);
-            //return
-            //    await Result.CreateAsync(result)
-            //                .OnSuccessAsync(() => func());
         }
 
         public async static Task<Result> OnSuccessAsync(
@@ -138,12 +119,9 @@ namespace RailwayExtensions.Extensions
         {
             Result result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return result;
-            }
-
-            return func();
+            return result.IsSuccess 
+                ? func() 
+                : result;
         }
 
         public async static Task<Result> OnSuccessAsync(
@@ -167,12 +145,9 @@ namespace RailwayExtensions.Extensions
         {
             Result result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return result;
-            }
-
-            return await func();
+            return result.IsSuccess
+                ? await func()
+                : result;
         }
     }
 }
