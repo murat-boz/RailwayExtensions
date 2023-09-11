@@ -75,7 +75,7 @@ namespace RailwayExtensions.Extensions
 
             return result.IsSuccess 
                 ? Result.Ok(func(result.Value))
-                : Result.Failure<TOut>(result.Error);
+                : Result.Failure<TOut>(result.Error, result.Exception);
         }
 
         public async static Task<Result<TOut>> OnSuccessAsync<TIn, TOut>(
@@ -103,7 +103,7 @@ namespace RailwayExtensions.Extensions
 
             return result.IsSuccess 
                 ? Result.Ok(await func(result.Value))
-                : Result.Failure<TOut>(result.Error);
+                : Result.Failure<TOut>(result.Error, result.Exception);
         }
 
         public async static Task<Result> OnSuccessAsync(

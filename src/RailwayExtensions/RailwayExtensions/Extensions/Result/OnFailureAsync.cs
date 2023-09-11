@@ -77,7 +77,7 @@ namespace RailwayExtensions.Extensions
             {
                 func(result.Value);
 
-                return Result.Failure<TOut>(result.Error);
+                return Result.Failure<TOut>(result.Error, result.Exception);
             }
 
             return Result.Ok<TOut>(default(TOut));
@@ -118,7 +118,7 @@ namespace RailwayExtensions.Extensions
             {
                 await func(result.Value);
 
-                return Result.Failure<TOut>(result.Error);
+                return Result.Failure<TOut>(result.Error, result.Exception);
             }
 
             return Result.Ok<TOut>(default(TOut));

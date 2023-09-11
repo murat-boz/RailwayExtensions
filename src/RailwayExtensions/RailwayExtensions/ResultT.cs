@@ -25,5 +25,11 @@ namespace RailwayExtensions
         {
             this.value = value;
         }
+
+        protected internal Result([AllowNull] T value, bool isSuccess, string error, Exception exception)
+            : base(isSuccess, error, exception)
+        {
+            this.value = value;
+        }
     }
 }

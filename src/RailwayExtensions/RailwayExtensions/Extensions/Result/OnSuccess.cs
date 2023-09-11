@@ -18,7 +18,7 @@ namespace RailwayExtensions.Extensions
         {
             if (result.IsFailure)
             {
-                return Result.Failure<TOut>(result.Error);
+                return Result.Failure<TOut>(result.Error, result.Exception);
             }
 
             return Result.Ok(func(result.Value));
