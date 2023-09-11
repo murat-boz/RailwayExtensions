@@ -25,9 +25,25 @@ namespace RailwayExtensions.Extensions
             return result;
         }
 
-        public static T OnBoth<T>(this Result<T> result, Func<Result, T> func)
+        public static Result OnBoth(this Result result, Action<string> func, string message)
         {
-            return func(result);
+            func(message);
+
+            return result;
+        }
+
+        public static Result<T> OnBoth<T>(this Result<T> result, Action<T> func)
+        {
+            func(result.Value);
+
+            return result;
+        }
+
+        public static Result<T> OnBoth<T>(this Result<T> result, Func<T> func)
+        {
+            func();
+
+            return result;
         }
     }
 }
