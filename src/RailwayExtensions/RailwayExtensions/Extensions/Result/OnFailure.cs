@@ -63,18 +63,40 @@ namespace RailwayExtensions.Extensions
         }
 
         /// <summary>
+        /// Execute <paramref name="func"/> only if failure
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="result"></param>
+        /// <param name="func"></param>
+        /// <returns>Return <see cref="Result"/> of processed on <paramref name="func"/> if failure, otherwise incoming <paramref name="result"/>></returns>
+        public static Result OnFailure<T>(
+            this Result result,
+            Func<T> func)
+        {
+            if (result.IsFailure)
+            {
+                func();
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Execute <paramref name="action"/> only if failure
         /// </summary>
         /// <param name="result"></param>
         /// <param name="func"></param>
         /// <returns>Return <see cref="Result"/> of processed on <paramref name="func"/> if failure, otherwise incoming <paramref name="result"/>></returns>
-        public static Result OnFailure(
-            this Result result,
-            Func<Result> func)
+        public static Result<T> OnFailure<T>(
+            this Result<T> result,
+            Func<T> func)
         {
-            return result.IsFailure 
-                        ? func() 
-                        : result;
+            if (result.IsFailure)
+            {
+                func();
+            }
+
+            return result;
         }
     }
 }

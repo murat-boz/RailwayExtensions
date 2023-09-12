@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,9 +51,19 @@ namespace RailwayExtensions
             return new Result<T>(default(T), false, errorMessage);
         }
 
+        public static Result<T> Failure<T>(T value, string errorMessage)
+        {
+            return new Result<T>(value, false, errorMessage);
+        }
+
         public static Result<T> Failure<T>(string errorMessage, Exception exception)
         {
             return new Result<T>(default(T), false, errorMessage, exception);
+        }
+
+        public static Result<T> Failure<T>(T value, string errorMessage, Exception exception)
+        {
+            return new Result<T>(value, false, errorMessage, exception);
         }
 
         public static Result<T> Ok<T>(T value)
@@ -98,6 +109,12 @@ namespace RailwayExtensions
         public static Result Combine(bool aggregateErrorMessages = false, params Result[] results)
         {
             StringBuilder stringBuilder = new StringBuilder();
+            List<Exception> exceptions  = new List<Exception>();
+
+            if (!aggregateErrorMessages)
+            {
+                return Result.Combine(results);
+            }
 
             foreach (Result result in results)
             {
@@ -105,14 +122,16 @@ namespace RailwayExtensions
                 {
                     stringBuilder.Append(result.Error);
                     stringBuilder.Append("\r\n");
+
+                    exceptions.Add(result.Exception);
                 }
             }
 
             var errorMessages = stringBuilder.ToString();
 
-            if (string.IsNullOrEmpty(errorMessages))
+            if (string.IsNullOrEmpty(errorMessages) || exceptions.Count > 0)
             {
-                return Result.Failure(errorMessages);
+                return Result.Failure(errorMessages, new AggregateException(errorMessages, exceptions));
             }
 
             return Result.Ok();
@@ -135,6 +154,37 @@ namespace RailwayExtensions
             }
 
             return Result.Ok<T>(results.LastOrDefault().Value);
+        }
+
+        public static Result<T> Combine<T>(bool aggregateErrorMessages = false, params Result<T>[] results)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<Exception> exceptions  = new List<Exception>();
+
+            if (!aggregateErrorMessages)
+            {
+                return Result.Combine(results);
+            }
+
+            foreach (Result result in results)
+            {
+                if (result.IsFailure)
+                {
+                    stringBuilder.Append(result.Error);
+                    stringBuilder.Append("\r\n");
+
+                    exceptions.Add(result.Exception);
+                }
+            }
+
+            var errorMessages = stringBuilder.ToString();
+
+            if (string.IsNullOrEmpty(errorMessages) || exceptions.Count > 0)
+            {
+                return Result.Failure<T>(errorMessages, new AggregateException(errorMessages, exceptions));
+            }
+
+            return Result.Ok<T>(default(T));
         }
 
         public static Result<T> Try<T>(Func<T> func, Func<Exception, string> errorHandler = null)
