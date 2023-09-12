@@ -13,7 +13,10 @@ namespace RailwayExtensions.Extensions
         /// <param name="func"></param>
         /// <param name="aggregateErrorMessages">Aggregates all failure messages and exceptions</param>
         /// <param name="errorHandler">Handler method when an exception occurred</param>
-        /// <returns>Return new failure <see cref="Result{TOut}"/> if failure, otherwise return new ok <see cref="Result{TOut}"/></returns>
+        /// <returns>Return new failure <see cref="Result{TOut}"/> if not getting an error while <paramref name="func"/> is invoked. 
+        /// If getting an error while <paramref name="func"/> is invoked, then looking up the <paramref name="aggregateErrorMessages"/>.
+        /// if it is true, return results combined incoming <paramref name="result"/> with get an error from <paramref name="func"/>,
+        /// otherwise return new failure <see cref="Result{TOut}"/> decorated with <paramref name="result"/> values</returns>
         public static Result<TOut> OnFailureTry<TIn, TOut>(
             this Result<TIn> result,
             Func<TIn, TOut> func,
@@ -47,7 +50,10 @@ namespace RailwayExtensions.Extensions
         /// <param name="action"></param>
         /// <param name="aggregateErrorMessages">Aggregates all failure messages and exceptions</param>
         /// <param name="errorHandler">Handler method when an exception occurred</param>
-        /// <returns>Return incoming <see cref="Result{T}"/></returns>
+        /// <returns>Return incoming <paramref name="result"/> if not getting an error while <paramref name="action"/> is invoked. 
+        /// If getting an error while <paramref name="action"/> is invoked, then looking up the <paramref name="aggregateErrorMessages"/>.
+        /// if it is true, return results combined incoming <paramref name="result"/> with get an error from <paramref name="action"/>,
+        /// otherwise return incoming <paramref name="result"/></returns>
         public static Result<T> OnFailureTry<T>(
             this Result<T> result,
             Action<T> action,
@@ -80,7 +86,10 @@ namespace RailwayExtensions.Extensions
         /// <param name="action"></param>
         /// <param name="aggregateErrorMessages">Aggregates all failure messages and exceptions</param>
         /// <param name="errorHandler">Handler method when an exception occurred</param>
-        /// <returns></returns>
+        /// <returns>Return incoming <paramref name="result"/> if not getting an error while <paramref name="action"/> is invoked. 
+        /// If getting an error while <paramref name="action"/> is invoked, then looking up the <paramref name="aggregateErrorMessages"/>.
+        /// if it is true, return results combined incoming <paramref name="result"/> with get an error from <paramref name="action"/>,
+        /// otherwise return incoming <paramref name="result"/></returns>
         public static Result OnFailureTry(
             this Result result,
             Action action,
@@ -114,7 +123,10 @@ namespace RailwayExtensions.Extensions
         /// <param name="func"></param>
         /// <param name="aggregateErrorMessages">Aggregates all failure messages and exceptions</param>
         /// <param name="errorHandler">Handler method when an exception occurred</param>
-        /// <returns>Return <see cref="Result"/> of processed on <paramref name="func"/> if failure, otherwise incoming <paramref name="result"/>></returns>
+        /// <returns>Return incoming <paramref name="result"/> if not getting an error while <paramref name="func"/> is invoked. 
+        /// If getting an error while <paramref name="func"/> is invoked, then looking up the <paramref name="aggregateErrorMessages"/>.
+        /// if it is true, return results combined incoming <paramref name="result"/> with get an error from <paramref name="func"/>,
+        /// otherwise return incoming <paramref name="result"/></returns>
         public static Result OnFailureTry<T>(
             this Result result,
             Func<T> func,
@@ -148,7 +160,10 @@ namespace RailwayExtensions.Extensions
         /// <param name="func"></param>
         /// <param name="aggregateErrorMessages">Aggregates all failure messages and exceptions</param>
         /// <param name="errorHandler">Handler method when an exception occurred</param>
-        /// <returns>Return <see cref="Result{T}"/> of processed on <paramref name="func"/> if failure, otherwise incoming <paramref name="result"/>></returns>
+        /// <returns>Return incoming <paramref name="result"/> if not getting an error while <paramref name="func"/> is invoked. 
+        /// If getting an error while <paramref name="func"/> is invoked, then looking up the <paramref name="aggregateErrorMessages"/>.
+        /// if it is true, return results combined incoming <paramref name="result"/> with get an error from <paramref name="func"/>,
+        /// otherwise return incoming <paramref name="result"/></returns>
         public static Result<T> OnFailureTry<T>(
             this Result<T> result,
             Func<T> func,
