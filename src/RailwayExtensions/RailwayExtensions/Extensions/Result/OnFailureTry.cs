@@ -34,12 +34,10 @@ namespace RailwayExtensions.Extensions
             {
                 return Result.Failure<TOut>(tryResult.Value, result.Error, result.Exception);
             }
-            else
-            {
-                var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
 
-                return Result.Failure<TOut>(combineResult.Error, combineResult.Exception);
-            }
+            var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
+
+            return Result.Failure<TOut>(combineResult.Error, combineResult.Exception);
         }
 
         /// <summary>
@@ -71,12 +69,10 @@ namespace RailwayExtensions.Extensions
             {
                 return result;
             }
-            else
-            {
-                var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
 
-                return Result.Failure<T>(result.Value, combineResult.Error, combineResult.Exception);
-            }
+            var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
+
+            return Result.Failure<T>(result.Value, combineResult.Error, combineResult.Exception);
         }
 
         /// <summary>
@@ -107,12 +103,10 @@ namespace RailwayExtensions.Extensions
             {
                 return result;
             }
-            else
-            {
-                var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
 
-                return Result.Failure(combineResult.Error, combineResult.Exception);
-            }
+            var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
+
+            return Result.Failure(combineResult.Error, combineResult.Exception);
         }
 
         /// <summary>
@@ -144,12 +138,10 @@ namespace RailwayExtensions.Extensions
             {
                 return result;
             }
-            else
-            {
-                var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
 
-                return Result.Failure(combineResult.Error, combineResult.Exception);
-            }
+            var combineResult = Result.Combine(aggregateErrorMessages, result, tryResult);
+
+            return Result.Failure(combineResult.Error, combineResult.Exception);
         }
 
         /// <summary>
@@ -181,12 +173,10 @@ namespace RailwayExtensions.Extensions
             {
                 return result;
             }
-            else
-            {
-                var combineResult = Result.Combine<T>(aggregateErrorMessages, result, tryResult);
 
-                return Result.Failure<T>(combineResult.Error, combineResult.Exception);
-            }
+            var combineResult = Result.Combine<T>(aggregateErrorMessages, result, tryResult);
+
+            return Result.Failure<T>(combineResult.Error, combineResult.Exception);
         }
     }
 }

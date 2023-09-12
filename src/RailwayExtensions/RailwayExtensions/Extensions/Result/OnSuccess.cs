@@ -67,16 +67,34 @@ namespace RailwayExtensions.Extensions
         /// <param name="result"></param>
         /// <param name="func"></param>
         /// <returns>Return <see cref="Result"/> of processed on <paramref name="func"/> if success, otherwise incoming <paramref name="result"/></returns>
-        public static Result OnSuccess(
+        public static Result OnSuccess<T>(
             this Result result,
-            Func<Result> func)
+            Func<T> func)
         {
-            if (result.IsFailure)
+            if (result.IsSuccess)
             {
-                return result;
+                func();
             }
 
-            return func();
+            return result;
+        }
+
+        /// <summary>
+        /// Execute <paramref name="action"/> only if success
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="func"></param>
+        /// <returns>Return <see cref="Result"/> of processed on <paramref name="func"/> if success, otherwise incoming <paramref name="result"/></returns>
+        public static Result<T> OnSuccess<T>(
+            this Result<T> result,
+            Func<T> func)
+        {
+            if (result.IsSuccess)
+            {
+                func();
+            }
+
+            return result;
         }
     }
 }

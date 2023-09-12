@@ -70,22 +70,35 @@ namespace RailwayExtensions.Extensions
         /// <summary>
         /// Execute <paramref name="action"/> in try catch function only if success
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="result"></param>
         /// <param name="func"></param>
         /// <returns>Return <see cref="Result"/> of processed on <paramref name="func"/> if success, otherwise incoming <paramref name="result"/></returns>
-        public static Result OnSuccessTry(
+        public static Result OnSuccessTry<T>(
             this Result result,
-            Func<Result> func,
+            Func<T> func,
             Func<Exception, string> errorHandler = null)
         {
-            if (result.IsFailure)
-            {
-                return result;
-            }
+            return result.IsFailure 
+                ? result 
+                : Result.Try(() => func(), errorHandler);
+        }
 
-            var tryResult = Result.Try(() => func(), errorHandler);
-
-            return tryResult.Value;
+        /// <summary>
+        /// Execute <paramref name="action"/> in try catch function only if success
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="result"></param>
+        /// <param name="func"></param>
+        /// <returns>Return <see cref="Result"/> of processed on <paramref name="func"/> if success, otherwise incoming <paramref name="result"/></returns>
+        public static Result<T> OnSuccessTry<T>(
+            this Result<T> result,
+            Func<T> func,
+            Func<Exception, string> errorHandler = null)
+        {
+            return result.IsFailure
+                ? result
+                : Result.Try(() => func(), errorHandler);
         }
     }
 }
