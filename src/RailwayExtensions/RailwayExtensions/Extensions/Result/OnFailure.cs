@@ -18,8 +18,10 @@ namespace RailwayExtensions.Extensions
         {
             if (result.IsFailure)
             {
-                func(result.Value);
-                return Result.Failure<TOut>(result.Error, result.Exception);
+                return Result.Failure<TOut>(
+                    func(result.Value), 
+                    result.Error, 
+                    result.Exception);
             }
 
             return Result.Ok<TOut>(default(TOut));
