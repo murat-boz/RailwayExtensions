@@ -39,12 +39,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return Result.Failure<TOut>(result.Error, result.Exception);
-            }
-
-            return Result.Ok(await func(result.Value));
+            return await result.OnSuccessAsync<TIn, TOut>(func);
         }
 
         /// <summary>
@@ -77,12 +72,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsSuccess)
-            {
-                await func();
-            }
-
-            return result;
+            return await result.OnSuccessAsync<T>(func);
         }
 
         /// <summary>
@@ -115,12 +105,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsSuccess)
-            {
-                await func();
-            }
-
-            return result;
+            return await result.OnSuccessAsync<T>(func);
         }
     }
 }
