@@ -16,9 +16,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            await func();
-
-            return result;
+            return await result.OnBothAsync(func);
         }
 
         public static async Task<Result> OnBothAsync(this Result result, Func<string, Task> func, string message)
@@ -32,9 +30,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            await func(message);
-
-            return result;
+            return await result.OnBothAsync(func, message);
         }
 
         public static async Task<Result<T>> OnBothAsync<T>(this Result<T> result, Func<Task<T>> func)
@@ -48,9 +44,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            await func();
-
-            return result;
+            return await result.OnBothAsync(func);
         }
 
         public static async Task<Result<TOut>> OnBothAsync<TIn, TOut>(this Result<TIn> result, Func<TIn, Task<TOut>> func)
@@ -62,7 +56,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            return Result.Map<TOut>(await func(result.Value), result);
+            return await result.OnBothAsync(func);
         }
     }
 }

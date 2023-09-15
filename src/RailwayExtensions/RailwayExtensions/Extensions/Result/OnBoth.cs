@@ -16,9 +16,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            action();
-
-            return result;
+            return result.OnBoth(action);
         }
 
         public static Result OnBoth(this Result result, Action<string> action, string message)
@@ -32,9 +30,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            action(message);
-
-            return result;
+            return result.OnBoth(action, message);
         }
 
         public static Result<T> OnBoth<T>(this Result<T> result, Action<T> action)
@@ -48,9 +44,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            action(result.Value);
-
-            return result;
+            return result.OnBoth<T>(action);
         }
 
         public static Result<TOut> OnBoth<TIn, TOut>(this Result<TIn> result, Func<TIn, TOut> func)
@@ -62,7 +56,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            return Result.Map<TOut>(func(result.Value), result);
+            return result.OnBoth<TIn, TOut>(func);
         }
     }
 }
