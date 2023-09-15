@@ -35,14 +35,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return result;
-            }
-
-            return await predicate(result.Value)
-                ? result
-                : Result.Failure<T>(errorMessage);
+            return await result.EnsureAsync(predicate, errorMessage);
         }
 
         public async static Task<Result> EnsureAsync(
@@ -67,14 +60,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return result;
-            }
-
-            return await predicate()
-                ? result
-                : Result.Failure(errorMessage);
+            return await result.EnsureAsync(predicate, errorMessage);
         }
     }
 }
