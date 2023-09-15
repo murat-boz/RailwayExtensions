@@ -5,64 +5,94 @@ namespace RailwayExtensions.Extensions
 {
     public static partial class ResultExtensions
     {
-        public static async Task<Result> OnBothAsync(this Result result, Func<Task> func)
-        {
-            await func();
-
-            return result;
-        }
-
-        public static async Task<Result> OnBothAsync(this Task<Result> resultTask, Func<Task> func)
-        {
-            var result = await resultTask.ConfigureAwait(false);
-
-            await func();
-
-            return result;
-        }
-
-        public static async Task<Result> OnBothAsync(this Result result, Func<string, Task> func, string message)
+        public async static Task<Result> OnBothAsync(this Result result, Func<string, Task<Result>> func, string message)
         {
             await func(message);
 
             return result;
         }
 
-        public static async Task<Result> OnBothAsync(this Task<Result> resultTask, Func<string, Task> func, string message)
+        public async static Task<Result> OnBothAsync(this Task<Result> result, Func<string, Task<Result>> func, string message)
         {
-            var result = await resultTask.ConfigureAwait(false);
-
             await func(message);
 
-            return result;
+            return await result;
         }
 
-        public static async Task<Result<T>> OnBothAsync<T>(this Result<T> result, Func<Task<T>> func)
+        public async static Task<Result<T>> OnBothAsync<T>(this Result<T> result, Func<Result, Task<T>> func)
         {
-            await func();
-
-            return result;
-        }
-
-        public static async Task<Result<T>> OnBothAsync<T>(this Task<Result<T>> resultTask, Func<Task<T>> func)
-        {
-            var result = await resultTask.ConfigureAwait(false);
-
-            await func();
+            await func(result);
 
             return result;
         }
 
-        public static async Task<Result<TOut>> OnBothAsync<TIn, TOut>(this Result<TIn> result, Func<TIn, Task<TOut>> func)
+        public async static Task<Result<T>> OnBothAsync<T>(this Task<Result<T>> resultTask, Func<Result, Task<T>> func)
         {
-            return Result.Map<TOut>(await func(result.Value), result);
+            var result = await resultTask;
+
+            await func(result);
+
+            return result;
         }
 
-        public static async Task<Result<TOut>> OnBothAsync<TIn, TOut>(this Task<Result<TIn>> resultTask, Func<TIn, Task<TOut>> func)
+        public async static Task<Result> OnBothAsync(this Result result, Action action)
         {
-            var result = await resultTask.ConfigureAwait(false);
+            return result.OnBoth(action);
+        }
 
-            return Result.Map<TOut>(await func(result.Value), result);
+        public async static Task<Result> OnBothAsync(this Task<Result> resultTask, Action action)
+        {
+            action();
+
+            return await resultTask;
+        }
+
+        public async static Task<Result> OnBothAsync(this Result result, Action<Result> action)
+        {
+            action(result);
+
+            return result;
+        }
+
+        public async static Task<Result> OnBothAsync(this Task<Result> resultTask, Action<Result> action)
+        {
+            var result = await resultTask;
+
+            action(result);
+
+            return result;
+        }
+
+        public async static Task<Result> OnBothAsync(this Result result, Action<string> action, string message)
+        {
+            action(message);
+
+            return result;
+        }
+
+        public static async Task<Result> OnBothAsync(this Task<Result> resultTask, Action<string> action, string message)
+        {
+            var result = await resultTask;
+
+            action(message);
+
+            return result;
+        }
+
+        public async static Task<Result<T>> OnBothAsync<T>(this Result<T> result, Action<T> action)
+        {
+            action(result.Value);
+
+            return result;
+        }
+
+        public async static Task<Result<T>> OnBothAsync<T>(this Task<Result<T>> resultTask, Action<T> action)
+        {
+            var result = await resultTask;
+
+            action(result.Value);
+
+            return result;
         }
     }
 }

@@ -11,23 +11,39 @@ namespace RailwayExtensions.Extensions
             return result;
         }
 
-        public static Result OnBoth(this Result result, Action<string> action, string message)
+        public static Result OnBoth(this Result result, Action<Result> action)
         {
-            action(message);
+            action(result);
 
             return result;
         }
 
-        public static Result<T> OnBoth<T>(this Result<T> result, Action<T> action)
+        public static Result OnBoth(this Result result, Func<string, Result> func, string message)
         {
-            action(result.Value);
+            func(message);
 
             return result;
         }
 
-        public static Result<TOut> OnBoth<TIn, TOut>(this Result<TIn> result, Func<TIn, TOut> func)
+        public static Result OnBoth(this Result result, Action<string> func, string message)
         {
-            return Result.Map<TOut>(func(result.Value), result);
+            func(message);
+
+            return result;
+        }
+
+        public static Result<T> OnBoth<T>(this Result<T> result, Action<T> func)
+        {
+            func(result.Value);
+
+            return result;
+        }
+
+        public static Result<T> OnBoth<T>(this Result<T> result, Func<T> func)
+        {
+            func();
+
+            return result;
         }
     }
 }

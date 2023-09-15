@@ -46,23 +46,6 @@ namespace RailwayExtensions
             return new Result(true, string.Empty);
         }
 
-        private static Result Map(
-            bool isSuccess,
-            string error,
-            Exception exception)
-        {
-            return new Result(isSuccess, error, exception);
-        }
-
-        private static Result<T> Map<T>(
-            T value,
-            bool isSuccess,
-            string error,
-            Exception exception)
-        {
-            return new Result<T>(value, isSuccess, error, exception);
-        }
-
         public static Result<T> Failure<T>(string errorMessage)
         {
             return new Result<T>(default(T), false, errorMessage);
@@ -234,11 +217,6 @@ namespace RailwayExtensions
                     : errorHandler(ex),
                     ex);
             }
-        }
-
-        public static Result<T> Map<T>(T value, Result result)
-        {
-            return Result.Map<T>(value, result.IsSuccess, result.Error, result.Exception);
         }
     }
 }
