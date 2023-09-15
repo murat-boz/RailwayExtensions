@@ -14,20 +14,20 @@ namespace RailwayExtensions
         public Exception Exception { get; private set; } = null;
 
         protected Result(
-            bool isSuccess, 
-            string error) 
+            bool isSuccess,
+            string error)
         {
             this.IsSuccess = isSuccess;
-            this.Error     = error;
+            this.Error = error;
         }
 
         protected Result(
             bool isSuccess,
-            string error, 
-            Exception exception) 
+            string error,
+            Exception exception)
         {
             this.IsSuccess = isSuccess;
-            this.Error     = error;
+            this.Error = error;
             this.Exception = exception;
         }
 
@@ -44,6 +44,23 @@ namespace RailwayExtensions
         public static Result Ok()
         {
             return new Result(true, string.Empty);
+        }
+
+        private static Result Map(
+            bool isSuccess,
+            string error,
+            Exception exception)
+        {
+            return new Result(isSuccess, error, exception);
+        }
+
+        private static Result<T> Map<T>(
+            T value,
+            bool isSuccess,
+            string error,
+            Exception exception)
+        {
+            return new Result<T>(value, isSuccess, error, exception);
         }
 
         public static Result<T> Failure<T>(string errorMessage)
@@ -88,8 +105,8 @@ namespace RailwayExtensions
 
         public async static Task<Result> CreateAsync(Result result)
         {
-            return result.IsSuccess 
-                        ? Result.Ok(result) 
+            return result.IsSuccess
+                        ? Result.Ok(result)
                         : Result.Failure("Failed when creating.", result.Exception);
         }
 
@@ -109,7 +126,7 @@ namespace RailwayExtensions
         public static Result Combine(bool aggregateErrorMessages = false, params Result[] results)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            List<Exception> exceptions  = new List<Exception>();
+            List<Exception> exceptions = new List<Exception>();
 
             if (!aggregateErrorMessages)
             {
@@ -159,7 +176,7 @@ namespace RailwayExtensions
         public static Result<T> Combine<T>(bool aggregateErrorMessages = false, params Result<T>[] results)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            List<Exception> exceptions  = new List<Exception>();
+            List<Exception> exceptions = new List<Exception>();
 
             if (!aggregateErrorMessages)
             {
@@ -195,8 +212,8 @@ namespace RailwayExtensions
             }
             catch (Exception ex)
             {
-                return Result.Failure<T>(errorHandler(ex) == null 
-                    ? ex.Message 
+                return Result.Failure<T>(errorHandler(ex) == null
+                    ? ex.Message
                     : errorHandler(ex),
                     ex);
             }
@@ -217,6 +234,11 @@ namespace RailwayExtensions
                     : errorHandler(ex),
                     ex);
             }
+        }
+
+        public static Result<T> Map<T>(T value, Result result)
+        {
+            return Result.Map<T>(value, result.IsSuccess, result.Error, result.Exception);
         }
     }
 }
