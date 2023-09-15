@@ -42,15 +42,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            if (result.IsFailure)
-            {
-                return Result.Failure<TOut>(
-                    func(result.Value),
-                    result.Error,
-                    result.Exception);
-            }
-
-            return Result.Ok<TOut>(default(TOut));
+            return result.OnFailure<TIn, TOut>(func);
         }
 
         /// <summary>
@@ -85,12 +77,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            if (result.IsFailure)
-            {
-                action(result.Value);
-            }
-
-            return result;
+            return result.OnFailure(action);
         }
 
         /// <summary>
@@ -123,12 +110,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            if (result.IsFailure)
-            {
-                action();
-            }
-
-            return result;
+            return result.OnFailure(action);
         }
 
         /// <summary>
@@ -163,12 +145,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            if (result.IsFailure)
-            {
-                func();
-            }
-
-            return result;
+            return result.OnFailure<T>(func);
         }
 
         /// <summary>
@@ -201,12 +178,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = resultTask.Result;
 
-            if (result.IsFailure)
-            {
-                func();
-            }
-
-            return result;
+            return result.OnFailure(func);
         }
     }
 }

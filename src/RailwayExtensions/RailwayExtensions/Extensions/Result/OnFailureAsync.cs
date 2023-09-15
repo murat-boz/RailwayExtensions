@@ -42,15 +42,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                return Result.Failure<TOut>(
-                    await func(result.Value),
-                    result.Error, 
-                    result.Exception);
-            }
-
-            return Result.Ok<TOut>(default(TOut));
+            return await result.OnFailureAsync<TIn, TOut>(func);
         }
 
         /// <summary>
@@ -85,12 +77,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                await func();
-            }
-
-            return result;
+            return await result.OnFailureAsync<T>(func);
         }
 
         /// <summary>
@@ -123,12 +110,7 @@ namespace RailwayExtensions.Extensions
         {
             var result = await resultTask.ConfigureAwait(false);
 
-            if (result.IsFailure)
-            {
-                await func();
-            }
-
-            return result;
+            return await result.OnFailureAsync<T>(func);
         }
     }
 }
