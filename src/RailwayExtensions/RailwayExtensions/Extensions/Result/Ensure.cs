@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace RailwayExtensions.Extensions
 {
@@ -27,11 +28,45 @@ namespace RailwayExtensions.Extensions
                 : Result.Failure<T>(errorMessage);
         }
 
+        public static Result<T> Ensure<T>(
+            this Task<Result<T>> resultTask,
+            Func<T, bool> predicate,
+            string errorMessage)
+        {
+            var result = resultTask.Result;
+
+            if (result.IsFailure)
+            {
+                return result;
+            }
+
+            return predicate(result.Value)
+                ? result
+                : Result.Failure<T>(errorMessage);
+        }
+
         public static Result Ensure(
             this Result result,
             Func<bool> predicate,
             string errorMessage)
         {
+            if (result.IsFailure)
+            {
+                return result;
+            }
+
+            return predicate()
+                ? result
+                : Result.Failure(errorMessage);
+        }
+
+        public static Result Ensure(
+            this Task<Result> resultTask,
+            Func<bool> predicate,
+            string errorMessage)
+        {
+            var result = resultTask.Result;
+
             if (result.IsFailure)
             {
                 return result;
