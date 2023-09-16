@@ -219,11 +219,43 @@ namespace RailwayExtensions
             }
         }
 
+        public async static Task<Result<T>> TryAsync<T>(Func<Task<T>> func, Func<Exception, string> errorHandler = null)
+        {
+            try
+            {
+                return Result.Ok(await func());
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<T>(errorHandler(ex) == null
+                    ? ex.Message
+                    : errorHandler(ex),
+                    ex);
+            }
+        }
+
         public static Result Try(Action action, Func<Exception, string> errorHandler = null)
         {
             try
             {
                 action();
+
+                return Result.Ok();
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure(errorHandler(ex) == null
+                    ? ex.Message
+                    : errorHandler(ex),
+                    ex);
+            }
+        }
+
+        public static async Task<Result> TryAsync(Func<Task> func, Func<Exception, string> errorHandler = null)
+        {
+            try
+            {
+                await func();
 
                 return Result.Ok();
             }
