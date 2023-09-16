@@ -6,7 +6,7 @@ namespace RailwayExtensions.Extensions
     public static partial class ResultExtensions
     {
         /// <summary>
-        /// Execute <paramref name="func"/> only if success
+        /// Execute <paramref name="func"/> in try catch function only if success
         /// </summary>
         /// <typeparam name="TIn"></typeparam>
         /// <typeparam name="TOut"></typeparam>
@@ -24,7 +24,7 @@ namespace RailwayExtensions.Extensions
         }
 
         /// <summary>
-        /// Execute <paramref name="func"/> only if success
+        /// Execute <paramref name="func"/> in try catch function only if success
         /// </summary>
         /// <typeparam name="TIn"></typeparam>
         /// <typeparam name="TOut"></typeparam>
@@ -42,7 +42,7 @@ namespace RailwayExtensions.Extensions
         }
 
         /// <summary>
-        /// Execute <paramref name="action"/> only if success
+        /// Execute <paramref name="action"/> in try catch function only if success
         /// </summary>
         /// <param name="result"></param>
         /// <param name="func"></param>
@@ -60,7 +60,7 @@ namespace RailwayExtensions.Extensions
         }
 
         /// <summary>
-        /// Execute <paramref name="action"/> only if success
+        /// Execute <paramref name="action"/> in try catch function only if success
         /// </summary>
         /// <param name="result"></param>
         /// <param name="func"></param>
@@ -76,7 +76,7 @@ namespace RailwayExtensions.Extensions
         }
 
         /// <summary>
-        /// Execute <paramref name="action"/> only if success
+        /// Execute <paramref name="action"/> in try catch function only if success
         /// </summary>
         /// <param name="result"></param>
         /// <param name="func"></param>
@@ -92,7 +92,7 @@ namespace RailwayExtensions.Extensions
         }
 
         /// <summary>
-        /// Execute <paramref name="action"/> only if success
+        /// Execute <paramref name="action"/> in try catch function only if success
         /// </summary>
         /// <param name="result"></param>
         /// <param name="func"></param>
