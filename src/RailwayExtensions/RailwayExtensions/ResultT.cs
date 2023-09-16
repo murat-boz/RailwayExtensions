@@ -11,12 +11,9 @@ namespace RailwayExtensions
         {
             get
             {
-                if (!base.IsSuccess)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                return value;
+                return value == null
+                    ? default(T)
+                    : value;
             }
         }
 

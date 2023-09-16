@@ -212,7 +212,7 @@ namespace RailwayExtensions
             }
             catch (Exception ex)
             {
-                return Result.Failure<T>(errorHandler(ex) == null
+                return Result.Failure<T>(errorHandler == null
                     ? ex.Message
                     : errorHandler(ex),
                     ex);
@@ -227,7 +227,7 @@ namespace RailwayExtensions
             }
             catch (Exception ex)
             {
-                return Result.Failure<T>(errorHandler(ex) == null
+                return Result.Failure<T>(errorHandler == null
                     ? ex.Message
                     : errorHandler(ex),
                     ex);
@@ -244,7 +244,7 @@ namespace RailwayExtensions
             }
             catch (Exception ex)
             {
-                return Result.Failure(errorHandler(ex) == null
+                return Result.Failure(errorHandler == null
                     ? ex.Message
                     : errorHandler(ex),
                     ex);
@@ -261,7 +261,7 @@ namespace RailwayExtensions
             }
             catch (Exception ex)
             {
-                return Result.Failure(errorHandler(ex) == null
+                return Result.Failure(errorHandler == null
                     ? ex.Message
                     : errorHandler(ex),
                     ex);
