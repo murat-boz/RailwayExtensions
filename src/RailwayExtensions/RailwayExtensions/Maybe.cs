@@ -105,5 +105,18 @@ namespace RailwayExtensions
         {
             return new Maybe<T>(obj);
         }
+
+        public static Maybe<T> Empty()
+        {
+            return new Maybe<T>(default(T));
+        }
+    }
+
+    /// <summary>
+    /// Non-generic entrypoint for <see cref="Maybe{T}" /> members
+    /// </summary>
+    public readonly struct Maybe
+    {
+        public static Maybe Empty => new Maybe();
     }
 }

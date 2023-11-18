@@ -12,7 +12,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <Description>This package is built for implementing Railway Oriented Programming.</Description>
     <PackageProjectUrl>https://github.com/murat-boz</PackageProjectUrl>
-    <PackageTags>Railway;ROP</PackageTags>
+    <PackageTags>Railway;ROP;Functional</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title></Title>
   </PropertyGroup>

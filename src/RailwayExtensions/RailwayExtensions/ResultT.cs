@@ -28,5 +28,10 @@ namespace RailwayExtensions
         {
             this.value = value;
         }
+
+        public static implicit operator Result<T>(T value)
+        {
+            return Result.Ok(value);
+        }
     }
 }

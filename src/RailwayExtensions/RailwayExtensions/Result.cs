@@ -93,23 +93,6 @@ namespace RailwayExtensions
             return Result.Ok<T>(result);
         }
 
-        public async static Task<Result<T>> CreateAsync<T>(T result)
-        {
-            return Result.Ok<T>(result);
-        }
-
-        public async static Task<Result> CreateAsync()
-        {
-            return Result.Ok();
-        }
-
-        public async static Task<Result> CreateAsync(Result result)
-        {
-            return result.IsSuccess
-                        ? Result.Ok(result)
-                        : Result.Failure("Failed when creating.", result.Exception);
-        }
-
         public static Result Combine(params Result[] results)
         {
             foreach (Result result in results)
