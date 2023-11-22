@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RailwayExtensions.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailwayExtensions.Tests", "test\RailwayExtensions.Tests\RailwayExtensions.Tests\RailwayExtensions.Tests.csproj", "{BCB8B3B7-17F2-4292-94AE-74F181158058}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayExtensions.Example", "example\RailwayExtensions.Example\RailwayExtensions.Example.csproj", "{0167782B-FB04-4327-B2DC-273E0EDCAA7B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{B9390F7E-091E-4F2D-BF20-EFF5BBEE7DCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,10 @@ Global
 		{BCB8B3B7-17F2-4292-94AE-74F181158058}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCB8B3B7-17F2-4292-94AE-74F181158058}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCB8B3B7-17F2-4292-94AE-74F181158058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0167782B-FB04-4327-B2DC-273E0EDCAA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0167782B-FB04-4327-B2DC-273E0EDCAA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0167782B-FB04-4327-B2DC-273E0EDCAA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0167782B-FB04-4327-B2DC-273E0EDCAA7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +46,7 @@ Global
 		{ADA5C6FB-97A8-4126-A140-DAFEA6A088DE} = {29857065-0B1D-4DD4-8DA4-D1B75909A309}
 		{C20A7CB4-D9BD-45FF-B94A-8875DB5D4F8E} = {3C3FBD9E-71CB-4AF7-9B3F-2F2FE259B3C0}
 		{BCB8B3B7-17F2-4292-94AE-74F181158058} = {C20A7CB4-D9BD-45FF-B94A-8875DB5D4F8E}
+		{0167782B-FB04-4327-B2DC-273E0EDCAA7B} = {B9390F7E-091E-4F2D-BF20-EFF5BBEE7DCB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6083C95-5932-4A98-BA06-818D8370B457}
