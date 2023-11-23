@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RailwayExtensions.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailwayExtensions.Tests", "test\RailwayExtensions.Tests\RailwayExtensions.Tests\RailwayExtensions.Tests.csproj", "{BCB8B3B7-17F2-4292-94AE-74F181158058}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayExtensions.Example", "example\RailwayExtensions.Example\RailwayExtensions.Example.csproj", "{0167782B-FB04-4327-B2DC-273E0EDCAA7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailwayExtensions.Example", "example\RailwayExtensions.Example\RailwayExtensions.Example.csproj", "{0167782B-FB04-4327-B2DC-273E0EDCAA7B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{B9390F7E-091E-4F2D-BF20-EFF5BBEE7DCB}"
 EndProject
